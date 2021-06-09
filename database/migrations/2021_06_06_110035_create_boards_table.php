@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCardListsTable extends Migration
+class CreateBoardsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,15 @@ class CreateCardListsTable extends Migration
      */
     public function up()
     {
-        Schema::create('card_lists', function (Blueprint $table) {
+        Schema::create('boards', function (Blueprint $table) {
             $table->id();
+
+            $table->string('title');
+            $table->string('color');
+
             $table->timestamps();
+
+            $table->foreignId('owner_id')->constrained('users');
         });
     }
 
@@ -26,6 +32,10 @@ class CreateCardListsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('card_lists');
+        Schema::table('boards', function (Blueprint  $table) {
+            $table->dropForeign(['owner_id']);
+        });
+
+        Schema::dropIfExists('boards');
     }
 }

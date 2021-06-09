@@ -15,7 +15,14 @@ class CreateCardsTable extends Migration
     {
         Schema::create('cards', function (Blueprint $table) {
             $table->id();
+
+            $table->string('title');
+            $table->smallInteger('order');
+
             $table->timestamps();
+
+            $table->foreignId('list_id')->constrained('card_lists');
+            $table->foreignId('owner_id')->constrained('users');
         });
     }
 
@@ -26,6 +33,10 @@ class CreateCardsTable extends Migration
      */
     public function down()
     {
+        Schema::table('cards', function (Blueprint  $table) {
+            $table->dropForeign(['list_id']);
+            $table->dropForeign(['owner_id']);
+        });
         Schema::dropIfExists('cards');
     }
 }
