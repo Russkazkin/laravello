@@ -1,3 +1,13 @@
-require('./bootstrap');
+import './bootstrap';
+import 'alpinejs';
+import Vue from 'vue';
 
-require('alpinejs');
+import Index from './Index'
+
+window.Vue = Vue;
+
+Vue.component("index", Index);
+
+const app = new Vue({
+  el: "#app",
+});
