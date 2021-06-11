@@ -2,11 +2,11 @@ import './bootstrap';
 import 'alpinejs';
 import Vue from 'vue';
 
-import Index from './Index'
+import Board from './Board'
 
 window.Vue = Vue;
 
-Vue.component("index", Index);
+Vue.component("Board", Board);
 
 const app = new Vue({
   el: "#app",

@@ -20,5 +20,5 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 Route::get('/{any?}', function () {
-    return view('welcome');
+    return view('app');
 })->where('any', '^(?!graphql)[\/\w.-]*$');
