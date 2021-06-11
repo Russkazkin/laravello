@@ -20,6 +20,8 @@
         "lodash": "^4.17.19",
         "postcss": "^8.2.1",
         "postcss-import": "^12.0.1",
+        "sass": "^1.34.1",
+        "sass-loader": "^11.0.1",
         "tailwindcss": "^2.0.2",
         "vue-loader": "^15.9.5",
         "vue-template-compiler": "^2.6.14"

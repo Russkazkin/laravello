@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="text-2xl test">
   <h1>Vue works!</h1>
 </div>
 </template>
