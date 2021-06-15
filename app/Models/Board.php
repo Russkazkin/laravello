@@ -12,6 +12,8 @@ class Board extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['title', 'color', 'owner_id'];
+
     public function lists(): HasMany
     {
         return $this->hasMany(CardList::class);
