@@ -19,10 +19,10 @@ class CreateCardsTable extends Migration
             $table->string('title');
             $table->smallInteger('order');
 
-            $table->timestamps();
-
             $table->foreignId('list_id')->constrained('card_lists');
             $table->foreignId('owner_id')->constrained('users');
+
+            $table->timestamps();
         });
     }
 

@@ -19,9 +19,9 @@ class CreateBoardsTable extends Migration
             $table->string('title');
             $table->string('color');
 
-            $table->timestamps();
-
             $table->foreignId('owner_id')->constrained('users');
+
+            $table->timestamps();
         });
     }
 

@@ -18,9 +18,9 @@ class CreateCardListsTable extends Migration
 
             $table->string('title');
 
-            $table->timestamps();
-
             $table->foreignId('board_id');
+
+            $table->timestamps();
         });
     }
 
