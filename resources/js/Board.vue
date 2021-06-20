@@ -6,11 +6,12 @@
     <div class="mr-2 w-1/3 flex justify-end">x</div>
   </div>
   <div class="h-full flex flex-col items-stretch">
-    <div class="mx-4 mb-2 text-white font-bold text-lg">The board title goes here</div>
-    <div class="flex flex-1 items-start overflow-x-auto mx-2">
-      <List />
-      <List />
-      <List />
+    <div class="mx-4 mb-2 text-white font-bold text-lg">
+      <span v-if="$apollo.queries.board.loading">Loading...</span>
+      <span v-else>{{ board.title }}</span>
+    </div>
+    <div class="flex flex-1 items-start overflow-x-auto mx-2" v-if="board">
+      <List v-for="list in board.lists" :key="list.id" :list="list" />
     </div>
   </div>
 </div>
