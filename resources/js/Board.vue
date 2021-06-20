@@ -17,11 +17,36 @@
 </template>
 
 <script>
+import gql from 'graphql-tag';
 import List from "./components/List";
 
 export default {
   name: "Board",
-  components: {List}
+  components: {List},
+  apollo: {
+    board: {
+      query: gql`
+        query($id: ID!) {
+          board(id: $id) {
+            title
+            color
+            lists {
+              id
+              title
+              cards {
+                id
+                title
+                order
+              }
+            }
+          }
+         }
+        `,
+      variables: {
+        id: 1,
+      }
+    }
+  }
 }
 </script>
 
