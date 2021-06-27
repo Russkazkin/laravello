@@ -1,4 +1,6 @@
 const mix = require('laravel-mix');
+
+const Graphql = require('./mix/Graphql');
 const tailwindcss = require('tailwindcss');
 
 /*
@@ -23,3 +25,6 @@ mix.js('resources/js/app.js', 'public/js')
 if (mix.inProduction()) {
     mix.version();
 }
+
+mix.extend('graphql', new Graphql());
+mix.graphql();
