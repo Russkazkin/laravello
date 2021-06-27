@@ -1,0 +1,15 @@
+{
+  "name": "Laravello GraphQL Schema",
+  "schemaPath": "../../../graphql/schema.graphql",
+  "extensions": {
+    "endpoints": {
+      "Default GraphQL Endpoint": {
+        "url": "http://laravello.skazkin/graphql",
+        "headers": {
+          "user-agent": "JS GraphQL"
+        },
+        "introspect": false
+      }
+    }
+  }
+}
