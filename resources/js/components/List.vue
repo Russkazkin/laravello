@@ -5,16 +5,18 @@
     </div>
     <Card v-for="card in list.cards" :key="card.id" :card="card" />
     <CardAddButton />
+    <CardEditor />
   </div>
 </template>
 
 <script>
 import CardAddButton from "./CardAddButton";
 import Card from "./Card";
+import CardEditor from "./CardEditor";
 
 export default {
   name: "List",
-  components: {CardAddButton, Card},
+  components: {CardEditor, CardAddButton, Card},
   props: {
     list: Object,
   }
