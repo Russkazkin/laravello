@@ -5,6 +5,8 @@
     placeholder="Enter a title for this card..."
     v-bind="title"
     ref="editor"
+    @keyup.esc="$emit('stopEditing')"
+    @keyup.enter="$emit('stopEditing')"
   >
   </textarea>
 </div>
