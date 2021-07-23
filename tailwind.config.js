@@ -9,12 +9,12 @@ module.exports = {
 
   theme: {
     extend: {
+      boxShadow: {
+        card: '0 1px 0 rgba(9, 30, 66, .25)',
+      },
       fontFamily: {
         sans: ['Nunito', ...defaultTheme.fontFamily.sans],
       },
-      boxShadow: {
-        card: '0 1px 0 rgba(9, 30, 66, .25)',
-      }
     },
   },
 

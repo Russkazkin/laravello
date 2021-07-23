@@ -4,8 +4,8 @@
       <div class="text-gray-800 pl-2 pb-2 font-bold">{{ list.title }}</div>
     </div>
     <Card v-for="card in list.cards" :key="card.id" :card="card" />
-    <CardAddButton />
-    <CardEditor />
+    <CardEditor v-if="editing" />
+    <CardAddButton v-else @startEditing="toggleEditing"></CardAddButton>
   </div>
 </template>
 
@@ -19,6 +19,16 @@ export default {
   components: {CardEditor, CardAddButton, Card},
   props: {
     list: Object,
+  },
+  data() {
+    return {
+      editing: false,
+    }
+  },
+  methods: {
+    toggleEditing() {
+      this.editing = !this.editing;
+    }
   }
 }
 </script>

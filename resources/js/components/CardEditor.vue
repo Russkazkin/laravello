@@ -4,6 +4,7 @@
     class="rounded-md py-1 px-2 outline-none w-full text-gray-900 text-sm bg-white h-16 resize-none shadow-card border-0"
     placeholder="Enter a title for this card..."
     v-bind="title"
+    ref="editor"
   >
   </textarea>
 </div>
@@ -16,6 +17,9 @@ export default {
     return {
       title: null,
     }
+  },
+  mounted() {
+    this.$refs.editor.focus();
   }
 }
 </script>

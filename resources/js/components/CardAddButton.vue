@@ -1,5 +1,5 @@
 <template>
-  <div @click="addCard" class="rounded-sm p-2 text-gray-600 cursor-pointer hover:bg-gray-400 hover:text-gray-800 text-sm mb-2">Add new card</div>
+  <div @click="$emit('startEditing')" class="rounded-sm p-2 text-gray-600 cursor-pointer hover:bg-gray-400 hover:text-gray-800 text-sm mb-2">Add new card</div>
 </template>
 
 <script>
@@ -10,7 +10,8 @@ export default {
   name: "CardAddButton",
   methods: {
     addCard() {
-      this.$apollo.mutate({
+      this.$emit('startEditing');
+      /*this.$apollo.mutate({
         mutation: CardAdd,
         variables: {
           title: 'Added from Vue',
@@ -25,7 +26,7 @@ export default {
           data.board.lists.find(list => list.id = 1).cards.push(cardAdd);
           store.writeQuery({ query: BoardQuery, data });
         }
-      });
+      });*/
     }
   }
 }
