@@ -9,6 +9,10 @@
     @keyup.enter="$emit('stopEditing')"
   >
   </textarea>
+  <div class="flex">
+    <button class="rounded-sm mr-1 py-1 px-3 bg-indigo-700 text-white hover:bg-indigo-600">Add Card</button>
+    <button class="py-1 px-3 rounded-md hover:bg-gray-400 text-gray-500">Cancel</button>
+  </div>
 </div>
 </template>
 
