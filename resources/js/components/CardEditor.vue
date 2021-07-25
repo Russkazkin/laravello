@@ -5,23 +5,50 @@
     placeholder="Enter a title for this card..."
     v-bind="title"
     ref="editor"
-    @keyup.esc="$emit('stopEditing')"
-    @keyup.enter="$emit('stopEditing')"
+    @keyup.esc="closeEditor"
+    @keyup.enter="addCard"
   >
   </textarea>
   <div class="flex">
-    <button class="rounded-sm mr-1 py-1 px-3 bg-indigo-700 text-white hover:bg-indigo-600">Add Card</button>
-    <button class="py-1 px-3 rounded-md hover:bg-gray-400 text-gray-500">Cancel</button>
+    <button @click="addCard" class="rounded-sm mr-1 py-1 px-3 bg-indigo-700 text-white hover:bg-indigo-600">Add Card</button>
+    <button @click="closeEditor" class="py-1 px-3 rounded-md hover:bg-gray-400 text-gray-500">Cancel</button>
   </div>
 </div>
 </template>
 
 <script>
+import CardAdd from "../graphql/CardAdd.gql";
+import BoardQuery from "../graphql/BoardWIthListsAndCards.gql";
+
 export default {
   name: "CardEditor",
   data() {
     return {
       title: null,
+    }
+  },
+  methods: {
+    addCard() {
+      this.$apollo.mutate({
+        mutation: CardAdd,
+        variables: {
+          title: 'Added from Vue',
+          listId: 1,
+          order: 1,
+        },
+        update(store, {data: {cardAdd}}) {
+          const data = store.readQuery({
+            query: BoardQuery,
+            variables: {id: 1}
+          });
+          data.board.lists.find(list => list.id = 1).cards.push(cardAdd);
+          store.writeQuery({ query: BoardQuery, data });
+        }
+      });
+      this.closeEditor();
+    },
+    closeEditor() {
+      this.$emit('stopEditing');
     }
   },
   mounted() {
