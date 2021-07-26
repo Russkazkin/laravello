@@ -40,6 +40,8 @@ type CardList {
     created_at: DateTime!
     updated_at: DateTime!
     cards: [Card!]! @hasMany
+    board: Board! @belongsTo
+    board_id: ID!
 }
 
 type Card {

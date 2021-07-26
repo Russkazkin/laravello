@@ -4,7 +4,7 @@
       <div class="text-gray-800 pl-2 pb-2 font-bold">{{ list.title }}</div>
     </div>
     <Card v-for="card in list.cards" :key="card.id" :card="card" />
-    <CardEditor v-if="editing" @stopEditing="toggleEditing" />
+    <CardEditor v-if="editing" @stopEditing="toggleEditing" :list="list" />
     <CardAddButton v-else @startEditing="toggleEditing"></CardAddButton>
   </div>
 </template>

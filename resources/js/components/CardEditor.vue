@@ -3,7 +3,7 @@
   <textarea
     class="rounded-md py-1 px-2 outline-none w-full text-gray-900 text-sm bg-white h-16 resize-none shadow-card border-0"
     placeholder="Enter a title for this card..."
-    v-bind="title"
+    v-model="title"
     ref="editor"
     @keyup.esc="closeEditor"
     @keyup.enter="addCard"
@@ -22,6 +22,9 @@ import BoardQuery from "../graphql/BoardWIthListsAndCards.gql";
 
 export default {
   name: "CardEditor",
+  props: {
+    list: Object,
+  },
   data() {
     return {
       title: null,
@@ -29,19 +32,20 @@ export default {
   },
   methods: {
     addCard() {
+      const self = this;
       this.$apollo.mutate({
         mutation: CardAdd,
         variables: {
-          title: 'Added from Vue',
-          listId: 1,
-          order: 1,
+          title: this.title,
+          listId: this.list.id,
+          order: this.list.cards.length + 1,
         },
         update(store, {data: {cardAdd}}) {
           const data = store.readQuery({
             query: BoardQuery,
-            variables: {id: 1}
+            variables: {id: self.list.board_id}
           });
-          data.board.lists.find(list => list.id = 1).cards.push(cardAdd);
+          data.board.lists.find(list => list.id == self.list.id).cards.push(cardAdd);
           store.writeQuery({ query: BoardQuery, data });
         }
       });
