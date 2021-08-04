@@ -6,49 +6,31 @@
     v-model="title"
     ref="editor"
     @keyup.esc="closeEditor"
-    @keyup.enter="addCard"
+    @keyup.enter="saved"
   >
   </textarea>
   <div class="flex">
-    <button @click="addCard" class="rounded-sm mr-1 py-1 px-3 bg-indigo-700 text-white hover:bg-indigo-600">Add Card</button>
+    <button @click="saved" class="rounded-sm mr-1 py-1 px-3 bg-indigo-700 text-white hover:bg-indigo-600">Add Card</button>
     <button @click="closeEditor" class="py-1 px-3 rounded-md hover:bg-gray-400 text-gray-500">Cancel</button>
   </div>
 </div>
 </template>
 
 <script>
-import CardAdd from "../graphql/CardAdd.gql";
-import BoardQuery from "../graphql/BoardWIthListsAndCards.gql";
-import {EVENT_CARD_ADDED} from "../constants";
 
 export default {
   name: "CardEditor",
-  props: {
-    list: Object,
-  },
+  props: {},
   data() {
-    return {
-      title: null,
-    }
+    return {}
   },
   methods: {
-    addCard() {
-      const self = this;
-      this.$apollo.mutate({
-        mutation: CardAdd,
-        variables: {
-          title: this.title,
-          listId: this.list.id,
-          order: this.list.cards.length + 1,
-        },
-        update(store, {data: {cardAdd}}) {
-          self.$emit('added', {store, data: cardAdd, type: EVENT_CARD_ADDED});
-          self.closeEditor();
-        }
-      });
-    },
     closeEditor() {
       this.$emit('stopEditing');
+    },
+    saved() {
+      this.$emit('saved');
+      this.closeEditor();
     }
   },
   mounted() {
