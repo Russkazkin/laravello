@@ -1,13 +1,15 @@
 <template>
-
+<CardEditor v-model="title" @stopEditing="closeEditor" @saved="addCard"></CardEditor>
 </template>
 
 <script>
 import CardAdd from "../graphql/CardAdd.gql";
 import {EVENT_CARD_ADDED} from "../constants";
+import CardEditor from "./CardEditor";
 
 export default {
   name: "CardAddEditor",
+  components: {CardEditor},
   props: {
     list: Object,
   },
@@ -35,9 +37,6 @@ export default {
     closeEditor() {
       this.$emit('stopEditing');
     }
-  },
-  mounted() {
-    this.$refs.editor.focus();
   }
 }
 </script>

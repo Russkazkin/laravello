@@ -3,10 +3,11 @@
   <textarea
     class="rounded-md py-1 px-2 outline-none w-full text-gray-900 text-sm bg-white h-16 resize-none shadow-card border-0"
     placeholder="Enter a title for this card..."
-    v-model="title"
+    :value="value"
     ref="editor"
     @keyup.esc="closeEditor"
     @keyup.enter="saved"
+    @input="$emit('input', $event.target.value)"
   >
   </textarea>
   <div class="flex">
@@ -20,17 +21,13 @@
 
 export default {
   name: "CardEditor",
-  props: {},
-  data() {
-    return {}
-  },
+  props: ['value'],
   methods: {
     closeEditor() {
       this.$emit('stopEditing');
     },
     saved() {
       this.$emit('saved');
-      this.closeEditor();
     }
   },
   mounted() {

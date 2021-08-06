@@ -7,7 +7,7 @@
           :key="card.id"
           :card="card"
           @deleted="$emit('card-deleted', {...$event, listId: list.id})" />
-    <CardEditor
+    <CardAddEditor
       v-if="editing"
       @stopEditing="toggleEditing"
       :list="list"
@@ -19,11 +19,11 @@
 <script>
 import CardAddButton from "./CardAddButton";
 import Card from "./Card";
-import CardEditor from "./CardEditor";
+import CardAddEditor from "./CardAddEditor";
 
 export default {
   name: "List",
-  components: {CardEditor, CardAddButton, Card},
+  components: {CardAddEditor, CardAddButton, Card},
   props: {
     list: Object,
   },
