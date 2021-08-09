@@ -6,7 +6,9 @@
     <Card v-for="card in list.cards"
           :key="card.id"
           :card="card"
-          @deleted="$emit('card-deleted', {...$event, listId: list.id})" />
+          @deleted="$emit('card-deleted', {...$event, listId: list.id})"
+          @updated="$emit('card-updated', {...$event, listId: list.id})"
+    />
     <CardAddEditor
       v-if="editing"
       @stopEditing="toggleEditing"

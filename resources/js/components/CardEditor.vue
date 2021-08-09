@@ -11,7 +11,7 @@
   >
   </textarea>
   <div class="flex">
-    <button @click="saved" class="rounded-sm mr-1 py-1 px-3 bg-indigo-700 text-white hover:bg-indigo-600">Add Card</button>
+    <button @click="saved" class="rounded-sm mr-1 py-1 px-3 bg-indigo-700 text-white hover:bg-indigo-600">{{ label }}</button>
     <button @click="closeEditor" class="py-1 px-3 rounded-md hover:bg-gray-400 text-gray-500">Cancel</button>
   </div>
 </div>
@@ -21,7 +21,7 @@
 
 export default {
   name: "CardEditor",
-  props: ['value'],
+  props: ['value', 'label'],
   methods: {
     closeEditor() {
       this.$emit('stopEditing');
