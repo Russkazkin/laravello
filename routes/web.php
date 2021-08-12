@@ -17,8 +17,12 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+//require __DIR__.'/auth.php';
 
 Route::get('/{any?}', function () {
     return view('app');
 })->where('any', '^(?!graphql)[\/\w.-]*$');
+
+Route::fallback(function () {
+    return view('app');
+});
