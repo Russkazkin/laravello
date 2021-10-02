@@ -22,10 +22,8 @@ mix.js('resources/js/app.js', 'public/js')
       postCss: [ tailwindcss('./tailwind.config.js') ],
     })
     .sourceMaps()
-    .browserSync('laravello.skazkin');
-if (mix.inProduction()) {
-    mix.version();
-}
+    .browserSync('laravello.skazkin')
+    .version();
 
 mix.extend('graphql', new Graphql());
 mix.graphql();
