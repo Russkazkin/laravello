@@ -9,6 +9,7 @@ const apolloClient = new ApolloClient({
     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
   },
   credentials: 'include',
+  onError: (error) => console.log(error),
 });
 
 export default new VueApollo({

@@ -47,14 +47,19 @@ export default {
     }
   },
   methods: {
-    authenticate() {
-      this.$apollo.mutate({
-        mutation: Login,
-        variables: {
-          email: this.email,
-          password: this.password,
-        }
-      });
+    async authenticate() {
+      try {
+        const response = (await this.$apollo.mutate({
+          mutation: Login,
+          variables: {
+            email: this.email,
+            password: this.password,
+          }
+        }));
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
     }
   }
 }
