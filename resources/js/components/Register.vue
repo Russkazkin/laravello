@@ -5,9 +5,7 @@
         <span>Laravello</span>
       </div>
       <div class="w-full sm:shadow-xl sm:bg-white sm:py-8 sm:px-12">
-        <div v-if="errors.length" class="p-2 bg-red-600 text-gray-100 rounded-sm mb-6 text-sm text-center">
-          <div v-for="(error, index) in errors" :key="index">{{ error.message }}</div>
-        </div>
+        <Errors :errors="errors" ></Errors>
         <div class="w-full text-center text-gray-600 font-bold mb-8">Signup to your account</div>
         <form @submit.prevent="register">
           <div class="w-full mb-4">
@@ -48,11 +46,13 @@
 </template>
 
 <script>
-import Register from "./graphql/Register.gql";
-import {gqlErrors} from "./utils";
+import Register from "../graphql/Register.gql";
+import {gqlErrors} from "../utils";
+import Errors from "./Errors";
 
 export default {
   name: "Register",
+  components: {Errors},
   data() {
     return {
       email: null,
