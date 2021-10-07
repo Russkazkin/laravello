@@ -14,9 +14,16 @@ type Mutation {
     cardAdd(input: CardAddInput! @spread): Card! @create
     cardDelete(id: ID!): Card @delete
     cardUpdate(id: ID!, title: String): Card @update
-    login(email: String!, password: String!): User!
+    login(
+        email: String! @rules(apply: ["required", "email"]),
+        password: String!
+    ): User!
     logout: User @guard
-    register(email: String!, password: String! @hash, name: String!): User! @create
+    register(
+        email: String! @rules(apply: ["required", "email", "unique:users"]),
+        password: String! @rules(apply: ["required", "min:6"]) @hash,
+        name: String! @rules(apply: ["required", "unique:users"])
+    ): User! @create
 }
 
 type User {
