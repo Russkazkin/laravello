@@ -3,7 +3,7 @@
   <div class="header text-white flex justify-between items-center mb-2 bg-purple-600">
     <div class="ml-2 w-1/3">x</div>
     <div class="text-lg opacity-50 cursor-pointer hover:opacity-75">Laravello</div>
-    <div class="mr-2 w-1/3 flex justify-end">x</div>
+    <div class="mr-2 w-1/3 flex justify-end">{{ isLoggedIn ? 'Logged In' : 'Not Logged In' }}</div>
   </div>
   <div class="h-full flex flex-col items-stretch">
     <div class="mx-4 mb-2 text-white font-bold text-lg">
@@ -30,6 +30,11 @@ import {EVENT_CARD_ADDED, EVENT_CARD_DELETED, EVENT_CARD_UPDATED} from "./consta
 export default {
   name: "Board",
   components: {List},
+  computed: {
+    isLoggedIn() {
+      return this.$store.state.isLoggedIn;
+    }
+  },
   apollo: {
     board: {
       query: BoardQuery,

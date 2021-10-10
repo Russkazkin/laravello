@@ -63,6 +63,8 @@ export default {
             password: this.password,
           }
         }));
+        this.$store.commit('setLoggedIn', true);
+        await this.$router.push({name: "board"});
       } catch (error) {
         this.errors = gqlErrors(error);
       }
