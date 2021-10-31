@@ -73,8 +73,12 @@ export default {
             password: this.password,
           }
         }));
-        await this.$store.dispatch('setLoggedIn', true);
-        await this.$router.push({name: "board"});
+        const user = response.data?.login;
+        if (user) {
+          await this.$store.dispatch('setLoggedIn', true);
+          await this.$store.commit('setUser', user);
+          await this.$router.push({name: "board"});
+        }
       } catch (error) {
         this.errors = gqlErrors(error);
       }
