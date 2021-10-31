@@ -4,7 +4,8 @@
     <div class="ml-2 w-1/3">x</div>
     <div class="text-lg opacity-50 cursor-pointer hover:opacity-75">Laravello</div>
     <div class="mr-2 w-1/3 flex justify-end">
-      <div v-if="isLoggedIn">
+      <div v-if="isLoggedIn" class="flex items-center">
+        <div class="text-sm mr-2">{{ name }}</div>
         <button class="header-btn">Logout</button>
       </div>
       <div v-else>
@@ -31,6 +32,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import BoardQuery from "./graphql/BoardWIthListsAndCards.gql";
 import List from "./components/List";
 import {EVENT_CARD_ADDED, EVENT_CARD_DELETED, EVENT_CARD_UPDATED} from "./constants";
@@ -38,11 +40,10 @@ import {EVENT_CARD_ADDED, EVENT_CARD_DELETED, EVENT_CARD_UPDATED} from "./consta
 export default {
   name: "Board",
   components: {List},
-  computed: {
-    isLoggedIn() {
-      return this.$store.state.isLoggedIn;
-    }
-  },
+  computed: mapState({
+    isLoggedIn: 'isLoggedIn',
+    name: state => state.user.name,
+  }),
   apollo: {
     board: {
       query: BoardQuery,
