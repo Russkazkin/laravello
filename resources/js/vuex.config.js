@@ -28,7 +28,15 @@ const store = {
       localStorage.setItem("isLoggedIn", isLoggedIn);
       commit("setLoggedIn", isLoggedIn);
     },
-    async fetchCurrentUser({commit, dispatch}, payload) {
+    async logout({commit, dispatch}) {
+      commit("setUser", {
+        id: null,
+        email: null,
+        name: null,
+      });
+      dispatch("setLoggedIn", false);
+    },
+    async fetchCurrentUser({commit, dispatch}) {
       const result = await apollo.defaultClient.query({
         query: Me,
         fetchPolicy: "no-cache",
@@ -38,11 +46,7 @@ const store = {
         commit("setUser", user);
         dispatch("setLoggedIn", true);
       } else {
-        commit("setUser", {
-          id: null,
-          email: null,
-          name: null,
-        });
+        dispatch("logout");
         dispatch("setLoggedIn", false);
       }
     }
