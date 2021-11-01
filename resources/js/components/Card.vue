@@ -3,8 +3,8 @@
     <div v-if="!editing" class="group bg-white rounded-sm p-2 cursor-pointer text-sm hover:bg-gray-100 mb-2 shadow-card flex justify-between">
       <div>{{ card.title }}</div>
       <div class="flex font-bold opacity-0 group-hover:opacity-100 transition-opacity ease-in-out">
-        <div class="text-gray-400 mr-2 p-1 hover:text-purple-700" @click="editing = true">E</div>
-        <div class="text-gray-400 p-1 hover:text-red-700" @click="cardDelete">D</div>
+        <div class="text-gray-400 mr-2 p-1 hover:text-purple-700" @click="editing = true" v-if="card.owner.id == userId">E</div>
+        <div class="text-gray-400 p-1 hover:text-red-700" @click="cardDelete" v-if="card.owner.id == userId">D</div>
       </div>
     </div>
     <CardEditor v-model="title" v-else class="mb-2" label="Save Card" @stopEditing="editing = false" @saved="cardUpdate"></CardEditor>
