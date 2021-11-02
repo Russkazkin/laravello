@@ -1,6 +1,9 @@
 export function gqlErrors(error) {
   const hasInternal = errors => errors.some(e => e.internal);
   const replaceInternal = (errors, err) => hasInternal(errors) ? errors.filter(e => !e.internal).concat(err) : errors;
+  if (error?.networkError && error.networkError.statusCode === 419) {
+    throw new AuthError("Unauthenticated");
+  }
   return replaceInternal((error?.graphQLErrors || []).map(e => {
     if (e.extensions?.category) {
       const validationErrors = e.extensions?.validation;
@@ -12,3 +15,5 @@ export function gqlErrors(error) {
     }
   }), {message: 'Something went wrong'}).flat();
 }
+
+export class AuthError extends Error {}
