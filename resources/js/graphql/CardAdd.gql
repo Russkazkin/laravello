@@ -3,5 +3,8 @@ mutation cardAdd ($title: String!, $order: Int!, $listId: ID!, $ownerId: ID!) {
         id
         title
         order
+        owner {
+            id
+        }
     }
 }
