@@ -14,7 +14,7 @@
       @stopEditing="toggleEditing"
       :list="list"
       @added="$emit('card-added', {...$event, listId: list.id})" />
-    <CardAddButton v-else @startEditing="toggleEditing"></CardAddButton>
+    <CardAddButton v-if="!editing && canAddCard" @startEditing="toggleEditing"></CardAddButton>
   </div>
 </template>
 
@@ -22,6 +22,7 @@
 import CardAddButton from "./CardAddButton";
 import Card from "./Card";
 import CardAddEditor from "./CardAddEditor";
+import {mapState} from "vuex";
 
 export default {
   name: "List",
@@ -33,6 +34,13 @@ export default {
     return {
       editing: false,
     }
+  },
+  computed: {
+    ...mapState({
+      canAddCard(state) {
+        return this.list.board.owner.id === state.user.id;
+      }
+    }),
   },
   methods: {
     toggleEditing() {
