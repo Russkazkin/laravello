@@ -1,7 +1,18 @@
 <template>
 <div class="h-full flex-col flex-column items-stretch" :class="bgColor">
   <div class="header text-white flex justify-between items-center mb-2">
-    <div class="ml-2 w-1/3">x</div>
+    <div class="ml-2 w-1/3">
+      <button @click="showBoards = !showBoards" class="header-btn">
+        Boards
+      </button>
+      <div v-if="showBoards" class="absolute bg-gray-200 rounded-sm mt-2 text-sm text-gray-600 border-gray-200 shadow w-64 overflow-y-auto z-10 p-2">
+        <div class="uppercase text-gray-600 text-xs font-semibold mb-2 ml-2">Boards</div>
+        <div v-for="n in 8" :key="n" class="m-2 bg-blue-100 rounded-sm opacity-100 hover:opacity-75 text-gray-700 font-bold cursor-pointer flex">
+          <div class="bg-blue-200 w-10 rounded-sm rounded-r-none"></div>
+          <div class="p-2">Board name!</div>
+        </div>
+      </div>
+    </div>
     <div class="text-lg opacity-50 cursor-pointer hover:opacity-75">Laravello</div>
     <div class="mr-2 w-1/3 flex justify-end">
       <div v-if="isLoggedIn" class="flex items-center">
@@ -42,6 +53,11 @@ import {colorMap500} from "./utils";
 export default {
   name: "Board",
   components: {List},
+  data() {
+    return {
+      showBoards: false,
+    };
+  },
   computed: {
     ...mapState({
       isLoggedIn: 'isLoggedIn',

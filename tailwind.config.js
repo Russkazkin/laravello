@@ -20,7 +20,7 @@ module.exports = {
 
   variants: {
     extend: {
-      opacity: ['disabled'],
+      opacity: ['group-hover', 'hover'],
     },
   },
 
