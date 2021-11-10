@@ -5,13 +5,13 @@
       <button @click="showBoards = !showBoards" class="header-btn">
         Boards
       </button>
-      <div v-if="showBoards" class="absolute bg-gray-200 rounded-sm mt-2 text-sm text-gray-600 border-gray-200 shadow w-64 overflow-y-auto z-10 p-2">
+      <DropdownMenu :show="showBoards">
         <div class="uppercase text-gray-600 text-xs font-semibold mb-2 ml-2">Boards</div>
         <div v-for="n in 8" :key="n" class="m-2 bg-blue-100 rounded-sm opacity-100 hover:opacity-75 text-gray-700 font-bold cursor-pointer flex">
           <div class="bg-blue-200 w-10 rounded-sm rounded-r-none"></div>
           <div class="p-2">Board name!</div>
         </div>
-      </div>
+      </DropdownMenu>
     </div>
     <div class="text-lg opacity-50 cursor-pointer hover:opacity-75">Laravello</div>
     <div class="mr-2 w-1/3 flex justify-end">
@@ -49,10 +49,11 @@ import Logout from "./graphql/Logout.gql";
 import List from "./components/List";
 import {EVENT_CARD_ADDED, EVENT_CARD_DELETED, EVENT_CARD_UPDATED} from "./constants";
 import {colorMap500} from "./utils";
+import DropdownMenu from "./components/DropdownMenu";
 
 export default {
   name: "Board",
-  components: {List},
+  components: {DropdownMenu, List},
   data() {
     return {
       showBoards: false,
