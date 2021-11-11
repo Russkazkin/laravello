@@ -2,3 +2,9 @@
 @import 'tailwindcss/components'
 @import "../css/header-btn.css"
 @import 'tailwindcss/utilities'
+
+.appear-enter-active, .appear-leave-active
+  transition: all 200ms ease-in
+.appear-enter, .appear-leave-to
+  opacity: 0
+  transform: translateY(20px)
