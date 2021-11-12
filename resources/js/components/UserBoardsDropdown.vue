@@ -15,14 +15,34 @@
 
 <script>
 import DropdownMenu from "./DropdownMenu";
+import {mapState} from "vuex";
+import UserBoards from "../graphql/UserBoards.gql";
 export default {
   name: "UserBoardsDropdown",
   components: { DropdownMenu },
+  apollo: {
+    userBoards: {
+      query: UserBoards,
+      variables() {
+        return {
+          userId: this.userId
+        }
+      },
+      skip() {
+        return !this.userId
+      }
+    }
+  },
   data() {
     return {
       showBoards: false,
     };
   },
+  computed: {
+    ...mapState({
+      userId: state => state.user.id
+    }),
+  }
 }
 </script>
 
