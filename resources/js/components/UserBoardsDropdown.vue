@@ -9,8 +9,9 @@
         v-for="board in userBoards"
         :key="board.id"
         :to="{name: 'board', params: {id: board.id}}"
-        class="m-2 bg-blue-100 rounded-sm opacity-100 hover:opacity-75 text-gray-700 font-bold cursor-pointer flex">
-        <div class="bg-blue-200 w-10 rounded-sm rounded-r-none"></div>
+        :class="colorMap100[board.color]"
+        class="m-2 rounded-sm opacity-100 hover:opacity-75 text-gray-700 font-bold cursor-pointer flex">
+        <div class="w-10 rounded-sm rounded-r-none" :class="colorMap200[board.color]"></div>
         <div class="p-2">{{ board.title }}</div>
       </router-link>
     </DropdownMenu>
@@ -21,6 +22,8 @@
 import DropdownMenu from "./DropdownMenu";
 import {mapState} from "vuex";
 import UserBoards from "../graphql/UserBoards.gql";
+import { colorMap100, colorMap200 } from "../utils";
+
 export default {
   name: "UserBoardsDropdown",
   components: { DropdownMenu },
@@ -46,6 +49,8 @@ export default {
     ...mapState({
       userId: state => state.user.id
     }),
+    colorMap100: () => colorMap100,
+    colorMap200: () => colorMap200,
   }
 }
 </script>
