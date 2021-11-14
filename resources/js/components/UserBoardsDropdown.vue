@@ -3,12 +3,13 @@
     <button @click="showBoards = !showBoards" class="header-btn">
       Boards
     </button>
-    <DropdownMenu :show="showBoards">
+    <DropdownMenu :show="showBoards" @closed="showBoards = false">
       <div class="uppercase text-gray-600 text-xs font-semibold mb-2 ml-2">Boards</div>
       <router-link
         v-for="board in userBoards"
         :key="board.id"
         :to="{name: 'board', params: {id: board.id}}"
+        @click.native="showBoards = false"
         :class="colorMap100[board.color]"
         class="m-2 rounded-sm opacity-100 hover:opacity-75 text-gray-700 font-bold cursor-pointer flex">
         <div class="w-10 rounded-sm rounded-r-none" :class="colorMap200[board.color]"></div>
