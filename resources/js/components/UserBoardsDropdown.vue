@@ -15,9 +15,12 @@
         <div class="w-10 rounded-sm rounded-r-none" :class="colorMap200[board.color]"></div>
         <div class="p-2">{{ board.title }}</div>
       </router-link>
-      <div class="rounded-sm hover:bg-gray-200 p-2 underline cursor-pointer mt-2">
+      <div class="rounded-sm hover:bg-gray-200 p-2 underline cursor-pointer mt-2" @click="showModal = true">
         Create new board...
       </div>
+      <Modal width="300" height="250" :show="showModal" @closed="showModal = false">
+        Hello! I'm modal!
+      </Modal>
     </DropdownMenu>
   </div>
 </template>
@@ -27,10 +30,11 @@ import DropdownMenu from "./DropdownMenu";
 import {mapState} from "vuex";
 import UserBoards from "../graphql/UserBoards.gql";
 import { colorMap100, colorMap200 } from "../utils";
+import Modal from "./Modal";
 
 export default {
   name: "UserBoardsDropdown",
-  components: { DropdownMenu },
+  components: {Modal, DropdownMenu },
   apollo: {
     userBoards: {
       query: UserBoards,
@@ -47,6 +51,7 @@ export default {
   data() {
     return {
       showBoards: false,
+      showModal: false,
     };
   },
   computed: {
