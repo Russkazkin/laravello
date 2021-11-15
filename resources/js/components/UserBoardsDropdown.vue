@@ -4,17 +4,20 @@
       Boards
     </button>
     <DropdownMenu :show="showBoards" @closed="showBoards = false">
-      <div class="uppercase text-gray-600 text-xs font-semibold mb-2 ml-2">Boards</div>
+      <div class="uppercase text-gray-600 text-xs font-semibold mb-2 ml-1">Boards</div>
       <router-link
         v-for="board in userBoards"
         :key="board.id"
         :to="{name: 'board', params: {id: board.id}}"
         @click.native="showBoards = false"
         :class="colorMap100[board.color]"
-        class="m-2 rounded-sm opacity-100 hover:opacity-75 text-gray-700 font-bold cursor-pointer flex">
+        class="rounded-sm opacity-100 hover:opacity-75 text-gray-700 font-bold cursor-pointer flex mb-1">
         <div class="w-10 rounded-sm rounded-r-none" :class="colorMap200[board.color]"></div>
         <div class="p-2">{{ board.title }}</div>
       </router-link>
+      <div class="rounded-sm hover:bg-gray-200 p-2 underline cursor-pointer mt-2">
+        Create new board...
+      </div>
     </DropdownMenu>
   </div>
 </template>
