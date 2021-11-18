@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Auth;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -17,6 +18,15 @@ class Board extends Model
     use HasFactory;
 
     protected $fillable = ['title', 'color', 'owner_id'];
+
+    protected static function booted()
+    {
+        static::created(function(Board $board) {
+            if (auth()->check()) {
+                $board->owner()->associate(Auth::user());
+            }
+        });
+    }
 
     public function lists(): HasMany
     {
