@@ -2,7 +2,7 @@
   <div
     @click="$emit('changed', color)"
     :class="[colors[color]]"
-    class="w-6 h-6 md:w-8 md:h-8 md:mr-2 rounded-sm cursor-pointer flex justify-center items-center text-white text-xl">
+    class="w-6 h-6 md:w-8 md:h-8 md:m-2 rounded-sm cursor-pointer flex justify-center items-center text-white text-xl">
     <span v-if="color === activeColor">✓</span>
   </div>
 </template>
