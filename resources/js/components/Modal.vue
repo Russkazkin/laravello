@@ -14,8 +14,8 @@
 export default {
   name: "Modal",
   props: {
-    width: Number,
-    height: Number,
+    width: String,
+    height: String,
     show: Boolean
   },
   computed: {

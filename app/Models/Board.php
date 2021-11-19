@@ -21,7 +21,7 @@ class Board extends Model
 
     protected static function booted()
     {
-        static::created(function(Board $board) {
+        static::creating(function(Board $board) {
             if (auth()->check()) {
                 $board->owner()->associate(Auth::user());
             }

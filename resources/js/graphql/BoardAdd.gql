@@ -1,4 +1,4 @@
-mutation BoardCreate($title: String!, $color: String!) {
+mutation BoardAdd($title: String!, $color: String!) {
     boardAdd(title: $title, color: $color) {
         id
         title
