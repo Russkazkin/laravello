@@ -28,6 +28,7 @@
             @card-deleted="updateQueryCache($event)"
             @card-updated="updateQueryCache($event)"
       />
+      <ListAddEditor></ListAddEditor>
     </div>
   </div>
 </div>
@@ -42,10 +43,11 @@ import {EVENT_CARD_ADDED, EVENT_CARD_DELETED, EVENT_CARD_UPDATED} from "./consta
 import {colorMap500} from "./utils";
 import DropdownMenu from "./components/DropdownMenu";
 import UserBoardsDropdown from "./components/UserBoardsDropdown";
+import ListAddEditor from "./components/ListAddEditor";
 
 export default {
   name: "Board",
-  components: {UserBoardsDropdown, List },
+  components: {ListAddEditor, UserBoardsDropdown, List },
   computed: {
     ...mapState({
       isLoggedIn: 'isLoggedIn',
