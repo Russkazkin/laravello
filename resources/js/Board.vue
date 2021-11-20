@@ -28,20 +28,19 @@
             @card-deleted="updateQueryCache($event)"
             @card-updated="updateQueryCache($event)"
       />
-      <ListAddEditor></ListAddEditor>
+      <ListAddEditor :board="board.id" @added="updateQueryCache($event)"></ListAddEditor>
     </div>
   </div>
 </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import {mapState} from "vuex";
 import BoardQuery from "./graphql/BoardWIthListsAndCards.gql";
 import Logout from "./graphql/Logout.gql";
 import List from "./components/List";
-import {EVENT_CARD_ADDED, EVENT_CARD_DELETED, EVENT_CARD_UPDATED} from "./constants";
+import {EVENT_CARD_ADDED, EVENT_CARD_DELETED, EVENT_CARD_UPDATED, EVENT_LIST_ADDED} from "./constants";
 import {colorMap500} from "./utils";
-import DropdownMenu from "./components/DropdownMenu";
 import UserBoardsDropdown from "./components/UserBoardsDropdown";
 import ListAddEditor from "./components/ListAddEditor";
 
@@ -78,6 +77,9 @@ export default {
       });
       const listById = () => data.board.lists.find(list => list.id == event.listId);
       switch (event.type) {
+        case EVENT_LIST_ADDED:
+          data.board.lists.push(event.data);
+          break;
         case EVENT_CARD_ADDED:
           listById().cards.push(event.data);
           break;

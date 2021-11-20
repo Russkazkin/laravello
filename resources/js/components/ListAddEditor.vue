@@ -9,10 +9,11 @@
         ref="title"
         placeholder="Enter list title..."
         @keyup.esc="hideEditor"
+        @keypress.enter="addList"
         v-model="title"
         class="rounded-sm border-blue-600 border-2 py-1 px-2 outline-none w-full text-gray-800 text-sm">
       <div class="flex">
-        <button class="rounded-sm mt-2 py-1 px-3 bg-blue-700 text-white hover:bg-blue-500 outline-none">Add List</button>
+        <button @click="addList" class="rounded-sm mt-2 py-1 px-3 bg-blue-700 text-white hover:bg-blue-500 outline-none">Add List</button>
         <button @click="hideEditor" class="rounded-sm mt-2 ml-1 py-1 px-3 rounded-md bg-gray-400 hover:bg-gray-500 text-gray-600">✕</button>
       </div>
     </div>
@@ -21,9 +22,12 @@
 
 <script>
 import {directive as onClickAway} from "vue-clickaway";
+import ListAdd from "../graphql/ListAdd.gql";
+import {EVENT_LIST_ADDED} from "../constants";
 export default {
   name: "ListAddEditor",
   directives: {onClickAway},
+  props: ['board'],
   data() {
     return {
       editing: false,
@@ -37,6 +41,20 @@ export default {
     startEditing() {
       this.editing = true;
       this.$nextTick(() => this.$refs.title.focus());
+    },
+    addList() {
+      const self = this;
+      this.$apollo.mutate({
+        mutation: ListAdd,
+        variables: {
+          title: this.title,
+          board: this.board,
+        },
+        update(store, {data: {listAdd}}){
+          self.$emit("added", {store, data: listAdd, type: EVENT_LIST_ADDED});
+          self.hideEditor();
+        }
+      });
     }
   }
 }
